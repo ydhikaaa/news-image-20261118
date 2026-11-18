@@ -33,15 +33,19 @@ warnings, and Gizmodo's space reporting, all dated that day).
 
 ## How it is built
 
-- `make_image.py` — draws the front page with Pillow: a navy masthead
-  naming the day, a hand-drawn Shenzhen dusk skyline for the lead
-  story, and a flat-illustration scene panel for each of the six
-  cards. Real fonts throughout, so no text is garbled.
-- `entry.png` — the rendered picture (1024×1024, ~143 KB).
+- `frontpage.py` — draws the current (round-2) edition with Pillow:
+  a broadsheet front page with a serif masthead naming the day, nine
+  numbered story cards with flat-illustration strips, a "by the
+  numbers" strip, a dotted world map with pins for the card stories,
+  and a numbered index of six more stories — fifteen stories in all.
+  Drawn at twice size and downscaled; real fonts throughout, so no
+  text is garbled, and the output is byte-for-byte deterministic.
+- `make_image.py` — the round-1 drawing script, kept for the record.
+- `entry.png` — the rendered picture (1024×1024, ~428 KB).
 - `main.py` — the entry program (Python 3.13, standard library only).
   It validates `entry.png` against the gate (PNG, ≤ 1 MiB,
-  ≤ 1024×1024) and copies it byte for byte to the output directory,
-  so both grader runs write identical bytes.
+  ≤ 1024×1024), copies it byte for byte to the output directory and
+  prints its SHA-256, so both grader runs write identical bytes.
 
 Run it the way the grader does:
 
@@ -49,7 +53,7 @@ Run it the way the grader does:
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 ```
 
-Redraw the picture with `python3 make_image.py` (needs Pillow; the
+Redraw the picture with `python3 frontpage.py` (needs Pillow; the
 entry program itself needs nothing beyond the standard library).
 
 ## License
